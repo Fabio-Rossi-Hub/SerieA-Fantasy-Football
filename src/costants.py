@@ -1,50 +1,46 @@
 player_cols = ['Season','Player', 'Pos', 'Squad', 'Comp', 'Age',
-        'Playing Time MP', 'Playing Time Starts', 'Playing Time Min',
-        'Playing Time 90s', 'Performance Gls', 'Performance Ast', 'Performance PK',
-        'Performance PKatt', 'Performance CrdY', 'Performance CrdR',
-        'Expected xG', 'Expected npxG', 'Expected xAG',
-        'Progression PrgC', 'Progression PrgP', 'Progression PrgR']
+        'MP', 'Starts', 'Min', '90s', 'Gls', 'Ast', 'PK',
+        'PKatt', 'CrdY', 'CrdR', 'xG', 'npxG', 'xAG',
+        'PrgC', 'PrgP', 'PrgR']
 
 player_cols_type = {
         'Season':str, 'Player': str, 'Pos': str, 'Squad': str, 'Comp': str, 'Age':'int8',
-        'Playing Time MP': 'int8', 'Playing Time Starts':'int8', 'Playing Time Min':'int16',
-        'Playing Time 90s':'float32', 'Performance Gls':'int8', 'Performance Ast':'int8', 'Performance PK':'int8',
-        'Performance PKatt':'int8', 'Performance CrdY':'int8', 'Performance CrdR':'int8',
-        'Expected xG':'float32', 'Expected npxG':'float32', 'Expected xAG':'float32',
-        'Progression PrgC':'int16', 'Progression PrgP':'int16', 'Progression PrgR':'int16'
+        'MP': 'int8', 'Starts':'int8', 'Min':'int16',
+        '90s':'float32', 'Gls':'int8', 'Ast':'int8', 'PK':'int8',
+        'PKatt':'int8', 'CrdY':'int8', 'CrdR':'int8',
+        'xG':'float32', 'npxG':'float32', 'xAG':'float32',
+        'PrgC':'int16', 'PrgP':'int16', 'PrgR':'int16'
 }
 
 player_cols_rename = {
-        'Playing Time MP': 'Match_Played', 'Playing Time Starts':'Match_Started', 'Playing Time Min':'Min_Played',
-        'Playing Time 90s': 'Avg_Min_Played', 'Performance Gls': 'Goal', 'Performance Ast': 'Assist', 'Performance PK': 'Penalties_Scored',
-        'Performance PKatt': 'Penalties_Attempted', 'Performance CrdY':'YCards', 'Performance CrdR':'RCards',
-        'Expected xG': 'xG', 'Expected npxG': 'npxG', 'Expected xAG':'xAG',
-        'Progression PrgC': 'PrgC', 'Progression PrgP': 'PrgP', 'Progression PrgR': 'PrgR'
+        'MP': 'Match_Played', 'Starts':'Match_Started', 'Min':'Min_Played',
+        '90s': 'Avg_Min_Played', 'Gls': 'Goal', 'Ast': 'Assist', 'PK': 'Penalties_Scored',
+        'PKatt': 'Penalties_Attempted', 'CrdY':'YCards', 'CrdR':'RCards',
+        'xG': 'xG', 'npxG': 'npxG', 'xAG':'xAG',
+        'PrgC': 'PrgC', 'PrgP': 'PrgP', 'PrgR': 'PrgR'
 }
 
 
 
 gk_cols = ['Season','Player','Pos', 'Squad', 'Comp', 'Age',
-        'Playing Time MP', 'Playing Time Starts', 'Playing Time Min', '90s',
-        'Performance GA', 'Performance SoTA',
-        'Performance Saves', 'Performance Save%', 'Performance CS', 'Performance CS%',
-        'Penalty Kicks PKatt', 'Penalty Kicks PKA', 'Penalty Kicks PKsv',
-        'Penalty Kicks PKm', 'Penalty Kicks Save%']
+        'MP', 'Starts', 'Min', '90s', 'GA', 'SoTA',
+        'Saves', 'Save%', 'CS', 'CS%', 'PKatt', 'PKA', 'PKsv',
+        'PKm', 'Save%']
 
 gk_cols_type = {
         'Season': str,'Player': str, 'Pos': str, 'Squad': str, 'Comp': str, 'Age':'int8',
-        'Playing Time MP': 'int8', 'Playing Time Starts': 'int8', 'Playing Time Min': 'int16', '90s': 'float32',
-        'Performance GA': 'int16', 'Performance SoTA': 'int16',
-        'Performance Saves': 'int16', 'Performance Save%': float, 'Performance CS': 'int8', 'Performance CS%': float,
-        'Penalty Kicks PKatt': 'int16', 'Penalty Kicks PKA': 'int16', 'Penalty Kicks PKsv': 'int16',
-        'Penalty Kicks PKm': 'int16', 'Penalty Kicks Save%': float}
+        'MP': 'int8', 'Starts': 'int8', 'Min': 'int16', '90s': 'float32',
+        'GA': 'int16', 'SoTA': 'int16',
+        'Saves': 'int16', 'Save%': float, 'CS': 'int8', 'CS%': float,
+        'PKatt': 'int16', 'PKA': 'int16', 'PKsv': 'int16',
+        'PKm': 'int16', 'Save%': float}
 
 gk_cols_rename = {
-        'Playing Time MP': 'Match_Played', 'Playing Time Starts':'Match_Started', 'Playing Time Min':'Min_Played',
-        '90s': 'Avg_Min_Played', 'Performance GA': 'Goal_Allowed', 'Performance SoTA': 'Shots_Target',
-        'Performance Saves': 'Saves', 'Performance Save%': 'Save%', 'Performance CS': 'Clean_Sheets', 'Performance CS%': 'Clean_Sheets%',
-        'Penalty Kicks PKatt': 'Penalties_Faced', 'Penalty Kicks PKA': 'Penalties_Allowed', 'Penalty Kicks PKsv': 'Penalties_Saves',
-        'Penalty Kicks PKm': 'Penalties_Miss', 'Penalty Kicks Save%': 'Penalties_Save%'}
+        'MP': 'Match_Played', 'Starts':'Match_Started', 'Min':'Min_Played',
+        '90s': 'Avg_Min_Played', 'GA': 'Goal_Allowed', 'SoTA': 'Shots_Target',
+        'Saves': 'Saves', 'Save%': 'Save%', 'CS': 'Clean_Sheets', 'CS%': 'Clean_Sheets%',
+        'PKatt': 'Penalties_Faced', 'PKA': 'Penalties_Allowed', 'PKsv': 'Penalties_Saves',
+        'PKm': 'Penalties_Miss', 'Save%': 'Penalties_Save%'}
 
 fanta_cols = ['Nome','Mv','Au']
 fanta_cols_type = {'Nome':str,'Mv':'float32','Au': 'int8'}
