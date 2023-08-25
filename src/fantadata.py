@@ -7,7 +7,7 @@ class Fantadata:
         self.championship = championship 
     
     @staticmethod
-    def clean_player_data(raw_df:pd.DataFrame, origin:str, championship: str = None)->pd.DataFrame:
+    def clean_player_data(raw_df:pd.DataFrame, origin:str, championship: str)->pd.DataFrame:
         """
             Basic cleaning of player data based on its origin(fbref/fanta).
 
@@ -24,9 +24,9 @@ class Fantadata:
         clean_df = clean_df.astype(const.col_type[origin])
         clean_df = clean_df.rename(columns=const.col_rename[origin])
 
-        return clean_df if 'fanta' in origin else clean_df[['Comp']=='Serie A']     
+        return clean_df if 'fanta' in origin else clean_df[['Comp']== championship]     
 
-    def get_player_stats_fbref(self):
+    def add_player_stats_fbref(self):
         """
             Get player statistics from FBref.
 
@@ -50,12 +50,12 @@ class Fantadata:
             pl_partial_df['Season'] = year
             pl_stats = pl_stats.append(pl_partial_df, ignore_index=True) if pl_stats else pl_partial_df
         
-        self.fbref_df = {'pl': self.clean_player_data(pl_stats, 'fbref_player'),
-                    'gk': self.clean_player_data(pl_stats, 'fbref_gk')}
+        self.fbref_df = {'pl': self.clean_player_data(pl_stats, 'fbref_player', self.championship),
+                    'gk': self.clean_player_data(pl_stats, 'fbref_gk', self.championship)}
         
         return "fbred data downloaded"
 
-    def get_player_fanta_score(self,seasons:list):
+    def add_player_fanta_score(self):
         """
             Get player Fantacalcio scores.
 
@@ -66,27 +66,21 @@ class Fantadata:
                 pd.DataFrame: Player Fantacalcio scores.
         """
         df_scores = None
-        for year in seasons:
+        for year in self.seasons:
             path = 'Data/Player Scores/Statistiche_Fantacalcio_Stagione_'+year[:4]+'_'+year[:-2]+'.xlsx'
             partial_df = pd.read_excel(path,skiprows=1, header=0)[0]
             partial_df['season'] = year
             df_scores = df_scores.append(partial_df, ignore_index=True) if df_scores else partial_df
         
-        self.fanta_scores_df = self.clean_player_data(df_scores, 'fanta_scores')
+        self.fanta_scores_df = self.clean_player_data(df_scores, 'fanta_scores', self.championship)
 
         return 'Fanta Scores Processed'
     
-    def get_fbref_stats(self):
+    def get_fbref_stats(self)-> pd.DataFrame:
         return self.fbref_df
     
-    def get_fanta_scores(self):
+    def get_fanta_scores(self)-> pd.DataFrame:
         return self.fanta_scores_df
-    
-    def assemble_stats(self):
-        if not self.fbref_df or not self.fanta_scores_df:
-            raise ValueError    
-
-        
 
 
 
