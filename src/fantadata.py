@@ -108,6 +108,4 @@ if __name__ == '__main__':
     df = Fantadata(seasons, 'it Serie A')
     df.add_player_fanta_score()
     df.add_player_stats_fbref()
-    df.save_dfs_to_parquet('Data/')
-
-
+    df.save_dfs_to_parquet()

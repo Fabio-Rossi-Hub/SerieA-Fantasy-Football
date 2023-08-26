@@ -14,8 +14,8 @@ player_cols_type = {
 
 player_cols_rename = {
         'MP': 'Match_Played', 'Starts':'Match_Started', 'Min':'Min_Played',
-        '90s': 'Avg_Min_Played', 'Gls': 'Goal', 'Ast': 'Assist', 'PK': 'Penalties_Scored',
-        'PKatt': 'Penalties_Attempted', 'CrdY':'YCards', 'CrdR':'RCards',
+        '90s': 'Avg_Min_Played', 'Gls': 'Goal', 'Ast': 'Assist', 'PK': 'Pen_Scored',
+        'PKatt': 'Pen_Attempted', 'CrdY':'YCards', 'CrdR':'RCards',
         'xG': 'xG', 'npxG': 'npxG', 'xAG':'xAG',
         'PrgC': 'PrgC', 'PrgP': 'PrgP', 'PrgR': 'PrgR'
 }
@@ -25,7 +25,7 @@ player_cols_rename = {
 gk_cols = ['Season','Player','Pos', 'Squad', 'Comp', 'Age',
         'MP', 'Starts', 'Min', '90s', 'GA', 'SoTA',
         'Saves', 'Save%', 'CS', 'CS%', 'PKatt', 'PKA', 'PKsv',
-        'PKm', 'Save%']
+        'PKm', 'PSave%']
 
 gk_cols_type = {
         'Season': str,'Player': str, 'Pos': str, 'Squad': str, 'Comp': str, 'Age':'int8',
@@ -33,14 +33,14 @@ gk_cols_type = {
         'GA': 'int16', 'SoTA': 'int16',
         'Saves': 'int16', 'Save%': float, 'CS': 'int8', 'CS%': float,
         'PKatt': 'int16', 'PKA': 'int16', 'PKsv': 'int16',
-        'PKm': 'int16', 'Save%': float}
+        'PKm': 'int16', 'PSave%': float}
 
 gk_cols_rename = {
         'MP': 'Match_Played', 'Starts':'Match_Started', 'Min':'Min_Played',
         '90s': 'Avg_Min_Played', 'GA': 'Goal_Allowed', 'SoTA': 'Shots_Target',
         'Saves': 'Saves', 'Save%': 'Save%', 'CS': 'Clean_Sheets', 'CS%': 'Clean_Sheets%',
-        'PKatt': 'Penalties_Faced', 'PKA': 'Penalties_Allowed', 'PKsv': 'Penalties_Saves',
-        'PKm': 'Penalties_Miss', 'Save%': 'Penalties_Save%'}
+        'PKatt': 'Pen_Faced', 'PKA': 'Pen_Allowed', 'PKsv': 'Pen_Saves',
+        'PKm': 'Pen_Miss', 'PSave%': 'Pen_Save%'}
 
 fanta_cols = ['Nome','Mv','Au']
 fanta_cols_type = {'Nome':str,'Mv':'float32','Au': 'int8'}
