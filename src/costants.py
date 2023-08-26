@@ -42,9 +42,9 @@ gk_cols_rename = {
         'PKatt': 'Pen_Faced', 'PKA': 'Pen_Allowed', 'PKsv': 'Pen_Saves',
         'PKm': 'Pen_Miss', 'PSave%': 'Pen_Save%'}
 
-fanta_cols = ['Nome','Mv','Au']
-fanta_cols_type = {'Nome':str,'Mv':'float32','Au': 'int8'}
-fanta_cols_rename = {'Nome':'Player','Mv':'Avg_Fanta_Score','Au': 'Autogoal'}
+fanta_cols = ['Season','Nome','Squadra','R','Mv','Au']
+fanta_cols_type = {'Season':str,'Nome':str,'R':str,'Mv':'float32','Au': 'int8'}
+fanta_cols_rename = {'Nome':'Player','Squadra':'Squad','R': 'F_Pos','Mv':'Avg_Fanta_Score','Au': 'Autogoal'}
 
 col_selection = {'fbref_gk':gk_cols,
                 'fbref_player':player_cols,

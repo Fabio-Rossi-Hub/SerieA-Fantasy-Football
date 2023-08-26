@@ -4,7 +4,8 @@ import fanta_utils as futils
 class Fantadata:
     def __init__(self, seasons: list, championship: str):
         self.seasons = seasons
-        self.championship = championship 
+        self.championship = championship
+        self.fanta_scores_df  = self.fbref_df = None
 
     @staticmethod
     def clean_player_data(raw_df:pd.DataFrame, origin:str, championship: str)->pd.DataFrame:
@@ -20,6 +21,7 @@ class Fantadata:
         """
         if origin in  ['fbref_player', 'fbref_gk']:
             raw_df = futils.rename_fbref_columns(raw_df)
+
         clean_df = raw_df[const.col_selection[origin]] 
         clean_df = clean_df.fillna(0)
         clean_df = clean_df.astype(const.col_type[origin])
@@ -27,16 +29,11 @@ class Fantadata:
 
         if origin in ['fbref_player', 'fbref_gk']:
             clean_df = clean_df.loc[clean_df['Comp'] == championship]
-        return clean_df     
+        return clean_df
 
     def add_player_stats_fbref(self):
         """
             Get player statistics from FBref.
-
-            Args:
-                seasons (list): List of seasons to fetch data for.
-                gk (bool, optional): True if goalkeepers' stats are to be fetched. False for outfield players. Defaults to False.
-
             Returns:
                 pd.DataFrame: Player statistics.
         """
@@ -77,7 +74,7 @@ class Fantadata:
             path = 'Data/Player Scores/Statistiche_Fantacalcio_Stagione_'+year[:4]+'_'+year[-2:]+'.xlsx'
             partial_df = pd.read_excel(path,skiprows=1, header=0, sheet_name='Tutti')
             #Store season in a column
-            partial_df['season'] = year
+            partial_df['Season'] = year
 
             #If first season then partial df becomes df_scores, otherwise we append
             df_scores = partial_df if df_scores is None else pd.concat([df_scores, partial_df], ignore_index=True)
@@ -87,25 +84,30 @@ class Fantadata:
         self.fanta_scores_df = self.clean_player_data(df_scores, 'fanta_scores', self.championship)
 
         print('Fanta Scores Added')
-    
+   
     def get_fbref_stats(self)-> pd.DataFrame:
+        '''Returns fbref df stats'''
         return self.fbref_df
-    
+   
     def get_fanta_scores(self)-> pd.DataFrame:
+        '''Returns fanta df scores'''
         return self.fanta_scores_df
-    
+    def save_fanta_scores(self, path: str):
+        '''Saves fanta score df to parquet file'''
+        self.fanta_scores_df.to_parquet(path+'fanta_scores.parquet', index=False)
     def save_dfs_to_parquet(self, path:str):
-            self.fanta_scores_df.to_parquet(path+'fanta_scores.parquet', index=False)
-            self.fbref_df['pl'].to_parquet(path + 'fbref_stats_pl.parquet', index=False)
-            self.fbref_df['gk'].to_parquet(path + 'fbref_stats_gk.parquet', index=False)
+        '''Saves all dfs to parquet file'''
+        self.fanta_scores_df.to_parquet(path+'fanta_scores.parquet', index=False)
+        self.fbref_df['pl'].to_parquet(path + 'fbref_stats_pl.parquet', index=False)
+        self.fbref_df['gk'].to_parquet(path + 'fbref_stats_gk.parquet', index=False)
 
 
 if __name__ == '__main__':
-    import pandas as pd
-    
-    seasons = ['2015-2016', '2016-2017', '2017-2018', '2018-2019','2019-2020', '2020-2021', '2021-2022','2022-2023']
-    
+
+    seasons = ['2015-2016', '2016-2017', '2017-2018', '2018-2019',
+            '2019-2020', '2020-2021', '2021-2022','2022-2023']
+
     df = Fantadata(seasons, 'it Serie A')
     df.add_player_fanta_score()
-    df.add_player_stats_fbref()
-    df.save_dfs_to_parquet()
+    #df.add_player_stats_fbref()
+    df.save_fanta_scores('Notebook/')
