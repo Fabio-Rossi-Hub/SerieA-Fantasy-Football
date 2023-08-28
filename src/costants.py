@@ -42,10 +42,12 @@ gk_cols_rename = {
         'PKatt': 'Pen_Faced', 'PKA': 'Pen_Allowed', 'PKsv': 'Pen_Saves',
         'PKm': 'Pen_Miss', 'PSave%': 'Pen_Save%'}
 
-fanta_cols = ['Season','Nome','Squadra','R','Mv','Au']
+fanta_cols = ['Season','Nome','Squadra','R','Pv', 'Mv', 'Gf', 'R-', 'Ass', 'Amm', 'Esp', 'Au']
 fanta_cols_type = {'Season':str,'Nome':str,'R':str,'Mv':'float32','Au': 'int8'}
-fanta_cols_rename = {'Nome':'Player','Squadra':'Squad','R': 'F_Pos','Mv':'Avg_Fanta_Score','Au': 'Autogoal'}
+fanta_cols_rename = {'Nome':'Player','Squadra':'Squad','R': 'F_Pos','Mv':'Avg_Fanta_Score',
+                'Pv':'Match_Played','Gf':'Goal', 'R-':'Pen_Missed', 'Ass':'Assist', 'Amm':'YCards', 'Esp':'RCards','Au': 'Autogoal'}
 
+prices_cols_rename = {'Nome':'Player','Team':'Squad_b'}
 col_selection = {'fbref_gk':gk_cols,
                 'fbref_player':player_cols,
                 'fanta_scores': fanta_cols
@@ -60,3 +62,6 @@ col_type= {'fbref_gk':gk_cols_type,
                 'fbref_player':player_cols_type,
                 'fanta_scores': fanta_cols_type
                 }
+
+fbref_url_dict = {'fbref_gk':'keepers',
+                'fbref_player':'stats'}
